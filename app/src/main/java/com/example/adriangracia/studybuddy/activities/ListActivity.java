@@ -5,11 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
 import com.example.adriangracia.studybuddy.R;
-import com.example.adriangracia.studybuddy.SingleFragmentActivityDrawer;
+import com.example.adriangracia.studybuddy.SingleFragmentActivity;
 import com.example.adriangracia.studybuddy.fragment.ListActivityFragment;
 
 
-public class ListActivity extends SingleFragmentActivityDrawer {
+public class ListActivity extends SingleFragmentActivity{
     //happy holidays!!
     @Override
     public void onCreate(Bundle savedInstanceState) {
