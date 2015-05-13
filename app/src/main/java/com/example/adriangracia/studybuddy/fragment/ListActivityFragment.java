@@ -58,7 +58,7 @@ public class ListActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.activity_main, container, false);
+        View v = inflater.inflate(R.layout.fragment_list_activity, container, false);
         adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, list);
         test = (ListView) v.findViewById(R.id.listView);
 

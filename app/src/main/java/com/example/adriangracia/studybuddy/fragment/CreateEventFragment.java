@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.adriangracia.studybuddy.activities.MainActivity;
+import com.example.adriangracia.studybuddy.activities.ListActivity;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.dialogs.ChooseDurationDialogFragment;
 import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
@@ -272,7 +272,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
                 if (success) {
                     // successfully created an event
-                    Intent i = new Intent(getActivity(), MainActivity.class);
+                    Intent i = new Intent(getActivity(), ListActivity.class);
                     startActivity(i);
 
                     // closing this screen
