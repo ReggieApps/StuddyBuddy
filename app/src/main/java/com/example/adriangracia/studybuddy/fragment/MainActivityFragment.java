@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.activities.ListActivity;
@@ -31,8 +32,6 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_main_activity, container, false);
-
-
 
         loginButton = (LoginButton) v.findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
