@@ -25,7 +25,7 @@
     <string name="duration">Duration:</string>
     <string name="attend_button">Attend</string>
     <string name="attend_page">Attend Page Test</string>
-    <string name="side_bar_text">Login Goes Here</string>
-
+    <string name="side_bar_text">Login Info Goes Here</string>
+    <string name="facebook_app_id">879500828783669</string>
 
 </resources>

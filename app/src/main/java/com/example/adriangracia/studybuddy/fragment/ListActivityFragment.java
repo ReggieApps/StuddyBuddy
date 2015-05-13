@@ -65,7 +65,7 @@ public class ListActivityFragment extends Fragment {
         task = new CreateNewProduct(this){
             @Override
             public void onResponseReceived() {
-
+                if(pDialog.isShowing()){pDialog.dismiss();}
             }
         }.execute();
 
