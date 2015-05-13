@@ -7,14 +7,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.SingleFragmentActivityDrawer;
-import com.example.adriangracia.studybuddy.fragment.MainActivityFragment;
-import com.example.adriangracia.studybuddy.SingleFragmentActivity;
-import com.facebook.appevents.AppEventsLogger;
+import com.example.adriangracia.studybuddy.fragment.ListActivityFragment;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -84,7 +81,7 @@ public class MainActivity extends SingleFragmentActivityDrawer {
 
     @Override
     public Fragment getFragment() {
-        return new MainActivityFragment();
+        return new ListActivityFragment();
     }
 
 }
