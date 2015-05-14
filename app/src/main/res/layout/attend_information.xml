@@ -36,6 +36,7 @@
         android:textSize="25sp"
         android:layout_alignParentBottom="true"
         android:id="@+id/attend_button"
+        android:background="@color/accent_color"
         android:layout_centerHorizontal="true"
         android:textStyle="normal"
         android:capitalize="none"></Button>

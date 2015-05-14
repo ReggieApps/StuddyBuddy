@@ -14,6 +14,7 @@ import android.widget.Toolbar;
 
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.activities.ListActivity;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -38,9 +39,14 @@ public class MainActivityFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_main_activity, container, false);
 
-
         toolbar = (Toolbar) v.findViewById(R.id.app_bar);
         getActivity().setActionBar(toolbar);
+
+        if (AccessToken.getCurrentAccessToken() != null) {
+            Intent i = new Intent(getActivity(), ListActivity.class);
+            startActivity(i);
+        }
+
 
         loginButton = (LoginButton) v.findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
@@ -52,9 +58,7 @@ public class MainActivityFragment extends Fragment {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        // Toast.makeText(getActivity(), loginResult.toString(), Toast.LENGTH_SHORT);
-                        Intent i = new Intent(getActivity(), ListActivity.class);
-                        startActivity(i);
+
                     }
 
                     @Override
