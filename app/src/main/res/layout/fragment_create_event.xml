@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar" />
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
+
     <LinearLayout
+
 
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
 
         <LinearLayout
             android:layout_margin="8dp"
@@ -79,6 +92,7 @@
                 android:id="@+id/button_create_pick_time"
                 android:text="Pick Time!"
                 android:layout_width="wrap_content"
+                android:background="@color/accent_color"
                 android:layout_height="wrap_content" />
 
 
@@ -106,6 +120,7 @@
                 android:id="@+id/button_create_pick_duration"
                 android:text="Choose Duration!"
                 android:layout_width="wrap_content"
+                android:background="@color/accent_color"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -170,9 +185,11 @@
         android:text="Create!"
         android:id="@+id/create_event_finalize"
         android:textSize="21sp"
+        android:background="@color/accent_color"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     </LinearLayout>
 </ScrollView>
+</LinearLayout>

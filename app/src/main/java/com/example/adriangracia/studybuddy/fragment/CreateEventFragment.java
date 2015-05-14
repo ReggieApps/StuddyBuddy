@@ -1,9 +1,11 @@
 package com.example.adriangracia.studybuddy.fragment;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.adriangracia.studybuddy.activities.ListActivity;
 import com.example.adriangracia.studybuddy.R;
@@ -66,6 +69,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
     // url to create new product
     private static String url_new_event = "http://isumobileclub.ilstu.edu/new_event.php";
+    private Toolbar toolbar;
 
     @Override
     public void onClick(View view) {
@@ -97,8 +101,12 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_create_event, container, false);
+
+        toolbar = (Toolbar) v.findViewById(R.id.app_bar);
+        getActivity().setActionBar(toolbar);
 
         eTitle = (EditText)v.findViewById(R.id.edit_text_create_event_title);
 

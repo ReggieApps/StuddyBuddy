@@ -1,5 +1,7 @@
 package com.example.adriangracia.studybuddy.fragment;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.adriangracia.studybuddy.R;
 
@@ -17,8 +20,15 @@ import com.example.adriangracia.studybuddy.R;
  */
 public class AttendInformationFragment extends Fragment {
 
+    private Toolbar toolbar;
+
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.attend_information, container, false);
+
+        toolbar = (Toolbar) v.findViewById(R.id.app_bar);
+        getActivity().setActionBar(toolbar);
 
         Bundle extras = getActivity().getIntent().getExtras();
         if (extras != null) {

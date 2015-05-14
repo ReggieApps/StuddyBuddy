@@ -2,7 +2,9 @@ package com.example.adriangracia.studybuddy.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 
 
 import com.example.adriangracia.studybuddy.R;
@@ -16,14 +18,10 @@ import com.facebook.appevents.AppEventsLogger;
  */
 public class MainActivity extends SingleFragmentActivity {
 
-    private Toolbar toolbar;
 
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
-//        toolbar = (Toolbar) findViewById(R.id.app_bar);
-//        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -41,7 +39,19 @@ public class MainActivity extends SingleFragmentActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
     public Fragment getFragment() {
         return new MainActivityFragment();
+    }
+
+    @Override
+    public void setSupportActionBar(Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
     }
 }

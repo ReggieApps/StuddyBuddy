@@ -1,6 +1,8 @@
 package com.example.adriangracia.studybuddy.fragment;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,11 +29,18 @@ public class MainActivityFragment extends Fragment {
 
     private LoginButton loginButton;
     private CallbackManager callbackManager;
+    private Toolbar toolbar;
 
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_main_activity, container, false);
+
+
+        toolbar = (Toolbar) v.findViewById(R.id.app_bar);
+        getActivity().setActionBar(toolbar);
 
         loginButton = (LoginButton) v.findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();

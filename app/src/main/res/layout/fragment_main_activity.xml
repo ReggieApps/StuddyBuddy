@@ -4,6 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"

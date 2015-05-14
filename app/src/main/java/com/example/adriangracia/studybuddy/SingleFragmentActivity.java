@@ -20,9 +20,6 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_fragment_container);
 
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
-
         Fragment aFrag = getSupportFragmentManager().findFragmentById(R.id.frame_layout_fragment_container);
 
         if(aFrag == null) {
@@ -31,4 +28,9 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     }
 
     public abstract Fragment getFragment();
+
+    @Override
+    public void setSupportActionBar(Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+    }
 }

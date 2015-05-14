@@ -1,13 +1,16 @@
 package com.example.adriangracia.studybuddy.fragment;
 
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,19 +56,22 @@ public class ListActivityFragment extends Fragment {
     private ProgressDialog pDialog;
 
     AsyncTask task;
-    private LoginButton loginButton;
+    private Toolbar toolbar;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_list_activity, container, false);
-        adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, list);
+        adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, list);
         test = (ListView) v.findViewById(R.id.listView);
 
-        task = new CreateNewProduct(this){
+        toolbar = (Toolbar) v.findViewById(R.id.app_bar);
+        getActivity().setActionBar(toolbar);
+
+        task = new CreateNewProduct(this) {
             @Override
             public void onResponseReceived() {
-                if(pDialog.isShowing()){pDialog.dismiss();}
             }
         }.execute();
 
@@ -99,11 +105,11 @@ public class ListActivityFragment extends Fragment {
         specifySubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    new CreateNewProduct(position){
+                if (position != 0) {
+                    new CreateNewProduct(position) {
                         @Override
                         public void onResponseReceived() {
-                            if (position == 0) {
-
+                            if (position == 1) {
                             } else {
                                 String selectedSubj = getResources().getStringArray(R.array.class_array)[position];
                                 for (int i = 0; i < eventList.size(); i++) {
@@ -112,23 +118,26 @@ public class ListActivityFragment extends Fragment {
                                         eventList.remove(i);
                                         i--;
                                     }
+                                    adapter.notifyDataSetChanged();
                                 }
-                                adapter.notifyDataSetChanged();
                             }
                         }
                     }.execute();
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+
         });
+
 
         Button refresh = (Button) v.findViewById(R.id.leftButton);
         refresh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new CreateNewProduct(v){
+                new CreateNewProduct(v) {
 
                     @Override
                     public void onResponseReceived() {
@@ -150,11 +159,10 @@ public class ListActivityFragment extends Fragment {
             }
         });
 
-
-       return v;
+        return v;
     }
 
-    abstract class CreateNewProduct extends AsyncTask<String, String, String> implements Handler.Callback{
+    abstract class CreateNewProduct extends AsyncTask<String, String, String> implements Handler.Callback {
 
         ListActivityFragment caller;
         View v;
@@ -164,11 +172,11 @@ public class ListActivityFragment extends Fragment {
             this.caller = caller;
         }
 
-        public CreateNewProduct(View v){
+        public CreateNewProduct(View v) {
             this.v = v;
         }
 
-        public CreateNewProduct(int position){
+        public CreateNewProduct(int position) {
             this.position = position;
         }
 
@@ -184,16 +192,15 @@ public class ListActivityFragment extends Fragment {
 
         protected String doInBackground(String... args) {
             JSONArray jsonArr = jsonParser.getJSONFromUrl(url_get_event);
-            for(int n = 0; n < jsonArr.length(); n++)
-            {
+            for (int n = 0; n < jsonArr.length(); n++) {
                 try {
                     JSONObject object = jsonArr.getJSONObject(n);
-                    if(!list.contains(object.getString("title"))){
-                    String[] time = object.getString("time").split(":");
-                    time[1] = time[1].substring(0, 2);
-                    EventObject tempEven = new EventObject(object.getString("title"), object.getString("location"), object.getString("description"), object.getString("subject"), 0, new TimeObject(Integer.parseInt(time[0]), Integer.parseInt(time[1])));
-                    eventList.add(tempEven);
-                    list.add(object.getString("title"));
+                    if (!list.contains(object.getString("title"))) {
+                        String[] time = object.getString("time").split(":");
+                        time[1] = time[1].substring(0, 2);
+                        EventObject tempEven = new EventObject(object.getString("title"), object.getString("location"), object.getString("description"), object.getString("subject"), 0, new TimeObject(Integer.parseInt(time[0]), Integer.parseInt(time[1])));
+                        eventList.add(tempEven);
+                        list.add(object.getString("title"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
