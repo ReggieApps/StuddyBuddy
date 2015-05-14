@@ -1,7 +1,9 @@
 package com.example.adriangracia.studybuddy.activities;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.fragment.CreateEventFragment;
@@ -18,9 +20,15 @@ public class CreateEvent extends SingleFragmentActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(id){
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

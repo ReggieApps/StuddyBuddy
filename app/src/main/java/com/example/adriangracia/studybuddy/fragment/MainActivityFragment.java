@@ -6,11 +6,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.activities.ListActivity;
@@ -33,14 +34,13 @@ public class MainActivityFragment extends Fragment {
     private Toolbar toolbar;
 
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_main_activity, container, false);
 
-        toolbar = (Toolbar) v.findViewById(R.id.app_bar);
-        getActivity().setActionBar(toolbar);
+        toolbar = (android.support.v7.widget.Toolbar) v.findViewById(R.id.app_bar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         if (AccessToken.getCurrentAccessToken() != null) {
             Intent i = new Intent(getActivity(), ListActivity.class);

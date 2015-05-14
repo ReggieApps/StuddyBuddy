@@ -10,7 +10,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,6 @@ public class ListActivityFragment extends Fragment {
     AsyncTask task;
     private Toolbar toolbar;
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -66,8 +66,8 @@ public class ListActivityFragment extends Fragment {
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, list);
         test = (ListView) v.findViewById(R.id.listView);
 
-        toolbar = (Toolbar) v.findViewById(R.id.app_bar);
-        getActivity().setActionBar(toolbar);
+        toolbar = (android.support.v7.widget.Toolbar) v.findViewById(R.id.app_bar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         task = new CreateNewProduct(this) {
             @Override

@@ -9,18 +9,22 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 
 import com.example.adriangracia.studybuddy.activities.ListActivity;
 import com.example.adriangracia.studybuddy.R;
+import com.example.adriangracia.studybuddy.activities.MainActivity;
 import com.example.adriangracia.studybuddy.dialogs.ChooseDurationDialogFragment;
 import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
@@ -101,12 +105,12 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_create_event, container, false);
 
         toolbar = (Toolbar) v.findViewById(R.id.app_bar);
-        getActivity().setActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         eTitle = (EditText)v.findViewById(R.id.edit_text_create_event_title);
 
@@ -124,6 +128,9 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         createEvent.setOnClickListener(this);
 
         subjectSpinner = (Spinner) v.findViewById(R.id.spinner_2);
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dealWithSavedState(savedInstanceState);
 

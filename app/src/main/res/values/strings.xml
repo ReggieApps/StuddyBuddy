@@ -28,5 +28,6 @@
     <string name="attend_page">Attend Page Test</string>
     <string name="side_bar_text">Login Info Goes Here</string>
     <string name="facebook_app_id">879500828783669</string>
+    <string name="back_arrow">back arrow</string>
 
 </resources>
