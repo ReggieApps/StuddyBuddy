@@ -1,11 +1,11 @@
 package com.example.adriangracia.studybuddy.fragment;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +24,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 
+
 /**
  * Created by Robby on 5/12/2015.
  */
@@ -37,10 +38,12 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
         View v = inflater.inflate(R.layout.fragment_main_activity, container, false);
 
-        toolbar = (android.support.v7.widget.Toolbar) v.findViewById(R.id.app_bar);
+        toolbar = (Toolbar) v.findViewById(R.id.app_bar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
 
         if (AccessToken.getCurrentAccessToken() != null) {
             Intent i = new Intent(getActivity(), ListActivity.class);

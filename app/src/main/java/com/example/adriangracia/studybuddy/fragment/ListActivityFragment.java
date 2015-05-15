@@ -1,6 +1,6 @@
 package com.example.adriangracia.studybuddy.fragment;
 
-import android.annotation.TargetApi;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import android.widget.Spinner;
 import com.example.adriangracia.studybuddy.activities.AttendInformation;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.activities.CreateEvent;
+import com.example.adriangracia.studybuddy.activities.ListActivity;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
 import com.example.adriangracia.studybuddy.objects.EventObject;
 import com.example.adriangracia.studybuddy.objects.TimeObject;
@@ -59,15 +62,21 @@ public class ListActivityFragment extends Fragment {
     AsyncTask task;
     private Toolbar toolbar;
 
+    private DrawerLayout draw;
+    private ActionBarDrawerToggle tog;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_list_activity, container, false);
+
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, list);
         test = (ListView) v.findViewById(R.id.listView);
 
-        toolbar = (android.support.v7.widget.Toolbar) v.findViewById(R.id.app_bar);
+        toolbar = (Toolbar) v.findViewById(R.id.app_bar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
 
         task = new CreateNewProduct(this) {
             @Override
