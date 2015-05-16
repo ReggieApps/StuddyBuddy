@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFAFA"
+    android:background="#FFFFFFFF"
     tools:context="com.example.adriangracia.studybuddy.fragment.NavigationDrawerFragment">
 
     <!-- TODO: Update blank fragment layout -->

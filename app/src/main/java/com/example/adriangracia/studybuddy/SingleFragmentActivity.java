@@ -13,8 +13,6 @@ import android.support.v7.widget.Toolbar;
  */
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

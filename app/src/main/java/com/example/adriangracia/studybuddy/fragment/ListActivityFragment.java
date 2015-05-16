@@ -4,14 +4,13 @@ package com.example.adriangracia.studybuddy.fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -39,7 +38,7 @@ import java.util.ArrayList;
 /**
  * Created by rgpaul on 4/20/2015.
  */
-public class ListActivityFragment extends Fragment {
+public class ListActivityFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     final public String information = "information";
 
@@ -60,8 +59,7 @@ public class ListActivityFragment extends Fragment {
     AsyncTask task;
     private Toolbar toolbar;
 
-    private DrawerLayout draw;
-    private ActionBarDrawerToggle tog;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
 
     @Override
@@ -73,12 +71,15 @@ public class ListActivityFragment extends Fragment {
         test = (ListView) v.findViewById(R.id.listView);
 
         toolbar = (Toolbar) v.findViewById(R.id.app_bar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
+
+        mSwipeRefreshLayout.setOnRefreshListener(this);
 
         NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout)getActivity().findViewById(R.id.drawer_layout), toolbar);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) getActivity().findViewById(R.id.drawer_layout), toolbar);
 
         task = new CreateNewProduct(this) {
             @Override
@@ -144,32 +145,29 @@ public class ListActivityFragment extends Fragment {
 
         });
 
+        return v;
+    }
 
-        Button refresh = (Button) v.findViewById(R.id.leftButton);
-        refresh.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new CreateNewProduct(v) {
-                    @Override
-                    public void onResponseReceived() {
-                        if (specifySubject.getSelectedItemPosition() == 0) {
+    @Override
+    public void onRefresh() {
+        new CreateNewProduct() {
+            @Override
+            public void onResponseReceived() {
+                if (specifySubject.getSelectedItemPosition() == 1 || specifySubject.getSelectedItemPosition() == 0) {
 
-                        } else {
-                            String selectedSubj = getResources().getStringArray(R.array.class_array)[specifySubject.getSelectedItemPosition()];
-                            for (int i = 0; i < eventList.size(); i++) {
-                                if (!eventList.get(i).getSubject().equals(selectedSubj)) {
-                                    list.remove(list.indexOf(eventList.get(i).getTitle()));
-                                    eventList.remove(i);
-                                    i--;
-                                }
-                            }
-                            adapter.notifyDataSetChanged();
+                } else {
+                    String selectedSubj = getResources().getStringArray(R.array.class_array)[specifySubject.getSelectedItemPosition()];
+                    for (int i = 0; i < eventList.size(); i++) {
+                        if (!eventList.get(i).getSubject().equals(selectedSubj)) {
+                            list.remove(list.indexOf(eventList.get(i).getTitle()));
+                            eventList.remove(i);
+                            i--;
                         }
                     }
-                }.execute();
+                    adapter.notifyDataSetChanged();
+                }
             }
-        });
-
-        return v;
+        }.execute();
     }
 
     abstract class CreateNewProduct extends AsyncTask<String, String, String> implements Handler.Callback {
@@ -177,6 +175,9 @@ public class ListActivityFragment extends Fragment {
         ListActivityFragment caller;
         View v;
         int position;
+
+        public CreateNewProduct() {
+        }
 
         public CreateNewProduct(ListActivityFragment caller) {
             this.caller = caller;
@@ -193,11 +194,13 @@ public class ListActivityFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Getting Events...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
+            if(!mSwipeRefreshLayout.isRefreshing()) {
+                pDialog = new ProgressDialog(getActivity());
+                pDialog.setMessage("Getting Events...");
+                pDialog.setIndeterminate(false);
+                pDialog.setCancelable(true);
+                pDialog.show();
+            }
         }
 
         protected String doInBackground(String... args) {
@@ -221,10 +224,14 @@ public class ListActivityFragment extends Fragment {
 
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
+
+            if(mSwipeRefreshLayout.isRefreshing()){
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+
             test.setAdapter(adapter);
             onResponseReceived();
             pDialog.dismiss();
-
         }
 
         public abstract void onResponseReceived();

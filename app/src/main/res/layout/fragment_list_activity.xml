@@ -27,34 +27,20 @@
         android:entries="@array/class_array"
         />
 
-    <ListView
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
+        android:id="@+id/swipe_refresh"
         android:layout_below="@id/spinner"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/Button2"
-        />
-
-    <RelativeLayout
-        android:id="@+id/bottomLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         >
-
-        <Button
-            android:text="REFRESH"
-            android:id="@+id/leftButton"
+        <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/accent_color"
-            android:textColor="#FFFFFF"
-
-
+            android:id="@+id/listView"
             />
-    </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <Button
         android:text="+"
