@@ -17,11 +17,11 @@
     </FrameLayout>
 
     <fragment
+        android:id="@+id/fragment_navigation_drawer"
         android:layout_width="@dimen/nav_drawer_width"
         android:layout_height="match_parent"
         app:layout="@layout/fragment_navigation_drawer"
         android:layout_gravity="start"
-        android:id="@+id/fragment_navigation_drawer"
         android:name="com.example.adriangracia.studybuddy.fragment.NavigationDrawerFragment"
         tools:layout="@layout/fragment_navigation_drawer"/>
 

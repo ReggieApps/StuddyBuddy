@@ -26,11 +26,9 @@ import android.widget.Spinner;
 import com.example.adriangracia.studybuddy.activities.AttendInformation;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.activities.CreateEvent;
-import com.example.adriangracia.studybuddy.activities.ListActivity;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
 import com.example.adriangracia.studybuddy.objects.EventObject;
 import com.example.adriangracia.studybuddy.objects.TimeObject;
-import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,8 +77,8 @@ public class ListActivityFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) ((AppCompatActivity)getActivity()).getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp((DrawerLayout)getActivity().findViewById(R.id.drawer_layout), toolbar);
+        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout)getActivity().findViewById(R.id.drawer_layout), toolbar);
 
         task = new CreateNewProduct(this) {
             @Override

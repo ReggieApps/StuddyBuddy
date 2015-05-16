@@ -1,19 +1,15 @@
 package com.example.adriangracia.studybuddy.fragment;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,7 +20,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.adriangracia.studybuddy.activities.ListActivity;
 import com.example.adriangracia.studybuddy.R;
-import com.example.adriangracia.studybuddy.activities.MainActivity;
 import com.example.adriangracia.studybuddy.dialogs.ChooseDurationDialogFragment;
 import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
