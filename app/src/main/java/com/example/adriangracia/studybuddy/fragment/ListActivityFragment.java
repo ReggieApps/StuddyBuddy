@@ -76,7 +76,11 @@ public class ListActivityFragment extends Fragment {
 
         toolbar = (Toolbar) v.findViewById(R.id.app_bar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
+        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) ((AppCompatActivity)getActivity()).getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp((DrawerLayout)getActivity().findViewById(R.id.drawer_layout), toolbar);
 
         task = new CreateNewProduct(this) {
             @Override

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.adriangracia.studybuddy.fragment.NavigationDrawerFragment;
 import com.facebook.Profile;
 
 /**
@@ -20,7 +21,6 @@ import com.facebook.Profile;
 public abstract class SingleFragmentActivityDrawers extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private ImageView profPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +35,11 @@ public abstract class SingleFragmentActivityDrawers extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.frame_layout_drawer_content_frame, getFragment()).commit();
         }
 
-        profPic = (ImageView) findViewById(R.id.prof_pic);
     }
 
     public DrawerLayout getDrawerLayout() {
         return drawerLayout;
     }
-
-    public ImageView getProfPic(){
-        return profPic;
-    }
-
 
     public abstract Fragment getFragment();
 }
