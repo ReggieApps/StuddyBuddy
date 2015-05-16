@@ -147,7 +147,6 @@ public class ListActivityFragment extends Fragment {
         refresh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new CreateNewProduct(v) {
-
                     @Override
                     public void onResponseReceived() {
                         if (specifySubject.getSelectedItemPosition() == 0) {

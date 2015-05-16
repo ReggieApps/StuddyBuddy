@@ -9,6 +9,7 @@ import android.view.Menu;
 
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.SingleFragmentActivity;
+import com.example.adriangracia.studybuddy.SingleFragmentActivityDrawers;
 import com.example.adriangracia.studybuddy.fragment.MainActivityFragment;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -16,7 +17,7 @@ import com.facebook.appevents.AppEventsLogger;
 /**
  * Created by Robby on 5/12/2015.
  */
-public class MainActivity extends SingleFragmentActivity {
+public class MainActivity extends SingleFragmentActivityDrawers {
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -39,8 +40,4 @@ public class MainActivity extends SingleFragmentActivity {
         return new MainActivityFragment();
     }
 
-    @Override
-    public void setSupportActionBar(Toolbar toolbar) {
-        super.setSupportActionBar(toolbar);
-    }
 }

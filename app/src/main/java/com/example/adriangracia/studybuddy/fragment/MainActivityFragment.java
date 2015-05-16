@@ -19,6 +19,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -53,7 +54,7 @@ public class MainActivityFragment extends Fragment {
 
         loginButton = (LoginButton) v.findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
-        loginButton.setReadPermissions("user_friends");
+        loginButton.setReadPermissions("public_profile");
         // Other app specific specialization
         loginButton.setFragment(this);
 
@@ -61,7 +62,7 @@ public class MainActivityFragment extends Fragment {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-
+                        Toast.makeText(getActivity(), "Logged in", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -71,7 +72,7 @@ public class MainActivityFragment extends Fragment {
 
                     @Override
                     public void onError(FacebookException exception) {
-                        // App code
+                        Toast.makeText(getActivity(), "Login Error", Toast.LENGTH_SHORT).show();
                     }
                 });
 
