@@ -17,7 +17,7 @@ import com.facebook.appevents.AppEventsLogger;
 /**
  * Created by Robby on 5/12/2015.
  */
-public class MainActivity extends SingleFragmentActivityDrawers {
+public class MainActivity extends SingleFragmentActivity {
 
 
     public void onCreate(Bundle savedInstanceState) {

@@ -2,7 +2,9 @@ package com.example.adriangracia.studybuddy.fragment;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,8 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.Toolbar;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.R;
+import com.example.adriangracia.studybuddy.activities.ListActivity;
+import com.example.adriangracia.studybuddy.activities.MainActivity;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.facebook.login.widget.ProfilePictureView;
 
 
 /**
@@ -27,6 +38,11 @@ public class NavigationDrawerFragment extends Fragment{
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
 
+    private ProfilePictureView profPic;
+    private TextView profName;
+    private Button logoutButton;
+    private Profile profile;
+
     private View containerView;
 
     private boolean mUserLearnedDrawer;
@@ -39,12 +55,27 @@ public class NavigationDrawerFragment extends Fragment{
         if(savedInstanceState!=null){
             mFromSavedInstanceState = true;
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        profPic = (ProfilePictureView) v.findViewById(R.id.prof_pic);
+        profName = (TextView) v.findViewById(R.id.facebook_name);
+        //Toast.makeText(getActivity(), Profile.getCurrentProfile().getFirstName(), Toast.LENGTH_SHORT).show();
+        //profName.append("Welcome " + Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName() + "!");
 
+
+        logoutButton = (Button) v.findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //LoginManager.getInstance().logOut();
+                Toast.makeText(getActivity(), "Logged out ", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getActivity(), MainActivity.class);
+                startActivity(i);
+            }
+        });
 
         return v;
     }

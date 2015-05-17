@@ -17,6 +17,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -59,7 +60,7 @@ public class MainActivityFragment extends Fragment {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        Toast.makeText(getActivity(), "Logged in", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "Logged in " + Profile.getCurrentProfile().getFirstName(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
