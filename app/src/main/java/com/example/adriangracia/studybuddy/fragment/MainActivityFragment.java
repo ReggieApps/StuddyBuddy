@@ -17,7 +17,9 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -32,46 +34,53 @@ public class MainActivityFragment extends Fragment {
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private Toolbar toolbar;
-
+    private ProfileTracker profileTracker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
         View v = inflater.inflate(R.layout.fragment_main_activity, container, false);
 
         toolbar = (Toolbar) v.findViewById(R.id.app_bar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-
-        if (AccessToken.getCurrentAccessToken() != null) {
+        if(Profile.getCurrentProfile() != null){
             Intent i = new Intent(getActivity(), ListActivity.class);
             startActivity(i);
         }
 
-        loginButton = (LoginButton) v.findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
-        loginButton.setReadPermissions("public_profile");
+        loginButton = (LoginButton) v.findViewById(R.id.login_button);
+        loginButton.setReadPermissions("user_friends");
         // Other app specific specialization
         loginButton.setFragment(this);
 
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        Toast.makeText(getActivity(), "Logged in ", Toast.LENGTH_SHORT).show();
-                    }
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Toast.makeText(getActivity(), "Logged in ", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getActivity(), ListActivity.class);
+                startActivity(i);
+            }
 
-                    @Override
-                    public void onCancel() {
-                        // App code
-                    }
+            @Override
+            public void onCancel() {
 
-                    @Override
-                    public void onError(FacebookException exception) {
-                        Toast.makeText(getActivity(), "Login Error", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+
+            }
+        });
+
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(
+                    Profile oldProfile,
+                    Profile currentProfile) {
+                // App code
+            }
+        };
 
         return v;
     }
@@ -80,7 +89,12 @@ public class MainActivityFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-        Intent i = new Intent(getActivity(), ListActivity.class);
-        startActivity(i);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        profileTracker.stopTracking();
+    }
+
 }

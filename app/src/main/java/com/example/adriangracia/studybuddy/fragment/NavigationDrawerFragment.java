@@ -76,8 +76,7 @@ public class NavigationDrawerFragment extends Fragment{
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-        //Toast.makeText(getActivity(), Profile.getCurrentProfile().getFirstName(), Toast.LENGTH_SHORT).show();
-        //profName.append("Welcome " + Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName() + "!");
+        profName.append("Welcome " + Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName() + "!");
 
 
         logoutButton = (Button) v.findViewById(R.id.logout_button);
