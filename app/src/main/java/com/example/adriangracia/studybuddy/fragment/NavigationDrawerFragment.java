@@ -4,9 +4,12 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,6 +28,8 @@ import com.example.adriangracia.studybuddy.activities.MainActivity;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.ProfilePictureView;
+
+import java.io.IOException;
 
 
 /**
@@ -63,6 +68,14 @@ public class NavigationDrawerFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         profPic = (ProfilePictureView) v.findViewById(R.id.prof_pic);
         profName = (TextView) v.findViewById(R.id.facebook_name);
+
+
+//        Bitmap bitmap=null;
+//        try {
+//            bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver() , Uri.parse(Profile.getCurrentProfile().getProfilePictureUri(64,64).toString()));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         //Toast.makeText(getActivity(), Profile.getCurrentProfile().getFirstName(), Toast.LENGTH_SHORT).show();
         //profName.append("Welcome " + Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName() + "!");
 
@@ -70,7 +83,7 @@ public class NavigationDrawerFragment extends Fragment{
         logoutButton = (Button) v.findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //LoginManager.getInstance().logOut();
+                LoginManager.getInstance().logOut();
                 Toast.makeText(getActivity(), "Logged out ", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getActivity(), MainActivity.class);
                 startActivity(i);

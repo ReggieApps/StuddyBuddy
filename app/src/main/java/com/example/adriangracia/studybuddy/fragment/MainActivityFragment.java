@@ -49,7 +49,6 @@ public class MainActivityFragment extends Fragment {
             startActivity(i);
         }
 
-
         loginButton = (LoginButton) v.findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
         loginButton.setReadPermissions("public_profile");
@@ -60,7 +59,7 @@ public class MainActivityFragment extends Fragment {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        //Toast.makeText(getActivity(), "Logged in " + Profile.getCurrentProfile().getFirstName(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Logged in ", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -84,5 +83,4 @@ public class MainActivityFragment extends Fragment {
         Intent i = new Intent(getActivity(), ListActivity.class);
         startActivity(i);
     }
-
 }
