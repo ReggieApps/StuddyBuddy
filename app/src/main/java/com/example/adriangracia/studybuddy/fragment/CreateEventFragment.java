@@ -24,6 +24,7 @@ import com.example.adriangracia.studybuddy.dialogs.ChooseDurationDialogFragment;
 import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
 import com.example.adriangracia.studybuddy.objects.TimeObject;
+import com.facebook.Profile;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -265,6 +266,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
             params.add(new BasicNameValuePair("description", desc));
             params.add(new BasicNameValuePair("subject", subj));
             params.add(new BasicNameValuePair("time", time));
+            params.add(new BasicNameValuePair("user_id", Profile.getCurrentProfile().getId()));
 
 
             // getting JSON Object
