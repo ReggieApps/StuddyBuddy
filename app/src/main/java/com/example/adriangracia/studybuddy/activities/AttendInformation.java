@@ -4,11 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
+import com.example.adriangracia.studybuddy.SingleFragmentActivityDrawers;
 import com.example.adriangracia.studybuddy.fragment.AttendInformationFragment;
-import com.example.adriangracia.studybuddy.SingleFragmentActivity;
 
 
-public class AttendInformation extends SingleFragmentActivity {
+public class AttendInformation extends SingleFragmentActivityDrawers {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

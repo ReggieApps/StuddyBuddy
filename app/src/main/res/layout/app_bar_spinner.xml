@@ -5,4 +5,12 @@
     android:background="@color/primary_color"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/class_array"
+        />
+
+
 </android.support.v7.widget.Toolbar>

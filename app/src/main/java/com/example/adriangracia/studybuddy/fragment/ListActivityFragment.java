@@ -70,9 +70,11 @@ public class ListActivityFragment extends Fragment implements SwipeRefreshLayout
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, list);
         test = (ListView) v.findViewById(R.id.listView);
 
-        toolbar = (Toolbar) v.findViewById(R.id.app_bar);
+        toolbar = (Toolbar) v.findViewById(R.id.app_bar_spinner);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
 
