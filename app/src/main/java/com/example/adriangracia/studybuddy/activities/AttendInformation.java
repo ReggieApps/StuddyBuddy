@@ -2,10 +2,8 @@ package com.example.adriangracia.studybuddy.activities;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
-import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.fragment.AttendInformationFragment;
 import com.example.adriangracia.studybuddy.SingleFragmentActivity;
 

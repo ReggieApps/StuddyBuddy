@@ -57,7 +57,6 @@ public class MainActivityFragment extends Fragment {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Toast.makeText(getActivity(), "Logged in ", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getActivity(), ListActivity.class);
                 startActivity(i);
             }

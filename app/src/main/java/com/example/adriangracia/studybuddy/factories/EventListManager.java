@@ -7,8 +7,6 @@ import android.content.Context;
  */
 public class EventListManager {
 
-
-
     private static EventListManager ourInstance;
 
     private Context context;

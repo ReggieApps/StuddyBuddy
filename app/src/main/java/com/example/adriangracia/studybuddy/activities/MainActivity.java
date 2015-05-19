@@ -1,24 +1,11 @@
 package com.example.adriangracia.studybuddy.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 
-
-import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.SingleFragmentActivity;
-import com.example.adriangracia.studybuddy.SingleFragmentActivityDrawers;
 import com.example.adriangracia.studybuddy.fragment.MainActivityFragment;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 
 /**
  * Created by Robby on 5/12/2015.

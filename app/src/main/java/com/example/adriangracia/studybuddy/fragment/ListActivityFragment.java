@@ -183,10 +183,6 @@ public class ListActivityFragment extends Fragment implements SwipeRefreshLayout
             this.caller = caller;
         }
 
-        public CreateNewProduct(View v) {
-            this.v = v;
-        }
-
         public CreateNewProduct(int position) {
             this.position = position;
         }

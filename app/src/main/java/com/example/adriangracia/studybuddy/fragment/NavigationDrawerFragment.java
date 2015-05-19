@@ -4,12 +4,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,14 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.R;
-import com.example.adriangracia.studybuddy.activities.ListActivity;
 import com.example.adriangracia.studybuddy.activities.MainActivity;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
-import com.facebook.login.widget.ProfilePictureView;
-
-import java.io.IOException;
-
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Robby on 5/15/2015.
@@ -43,10 +35,9 @@ public class NavigationDrawerFragment extends Fragment{
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
 
-    private ProfilePictureView profPic;
+    private ImageView profPic;
     private TextView profName;
     private Button logoutButton;
-    private Profile profile;
 
     private View containerView;
 
@@ -66,18 +57,12 @@ public class NavigationDrawerFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-        profPic = (ProfilePictureView) v.findViewById(R.id.prof_pic);
+        profPic = (ImageView) v.findViewById(R.id.prof_pic);
         profName = (TextView) v.findViewById(R.id.facebook_name);
 
+        Picasso.with(getActivity().getApplicationContext()).load("https://graph.facebook.com/" + Profile.getCurrentProfile().getId() + "/picture?type=large").into(profPic);
 
-//        Bitmap bitmap=null;
-//        try {
-//            bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver() , Uri.parse(Profile.getCurrentProfile().getProfilePictureUri(64,64).toString()));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         profName.append("Welcome " + Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName() + "!");
-
 
         logoutButton = (Button) v.findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
