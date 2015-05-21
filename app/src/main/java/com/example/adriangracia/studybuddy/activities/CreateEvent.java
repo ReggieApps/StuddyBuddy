@@ -4,13 +4,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
-import com.example.adriangracia.studybuddy.SingleFragmentActivityDrawers;
+import com.example.adriangracia.studybuddy.SingleFragmentActivity;
 import com.example.adriangracia.studybuddy.fragment.CreateEventFragment;
 
 /**
  * Created by rgpaul on 4/20/2015.
  */
-public class CreateEvent extends SingleFragmentActivityDrawers {
+public class CreateEvent extends SingleFragmentActivity {
 
     @Override
     public Fragment getFragment() {
