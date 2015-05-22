@@ -266,7 +266,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
             params.add(new BasicNameValuePair("description", desc));
             params.add(new BasicNameValuePair("subject", subj));
             params.add(new BasicNameValuePair("time", time));
-            params.add(new BasicNameValuePair("attend_ids", (String) Profile.getCurrentProfile().getId()));
+            params.add(new BasicNameValuePair("attend_ids",Profile.getCurrentProfile().getId()));
 
 
             // getting JSON Object

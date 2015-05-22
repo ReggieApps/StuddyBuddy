@@ -42,12 +42,14 @@ public class AttendInformationFragment extends Fragment {
             TextView durationAppend = (TextView)v.findViewById(R.id.editDuration);
             TextView descriptionAppend = (TextView)v.findViewById(R.id.editDescription);
             TextView subjectAppend = (TextView) v.findViewById(R.id.editSubject);
+            TextView goingAppend = (TextView) v.findViewById(R.id.edit_people_going);
             timeAppend.append("  " + value[0]);
             placeAppend.append("  " + value[1]);
             titleAppend.append("  " + value[2]);
             durationAppend.append("  " + value[3]);
             descriptionAppend.append("  " + value[4]);
             subjectAppend.append(" " + value[5]);
+            goingAppend.append(" " + value[7]);
 
 
         }

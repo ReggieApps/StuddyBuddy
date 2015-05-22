@@ -13,14 +13,18 @@ public class EventObject implements Serializable{
     String subject;
     int duration;
     TimeObject to;
+    String peopleGoing;
+    String numPeopleGoing;
 
-    public EventObject(String title, String location,String description, String subject, int duration, TimeObject to){
+    public EventObject(String title, String location,String description, String subject, int duration, TimeObject to, String peopleGoing, String numPeopleGoing){
         this.title=title;
         this.location=location;
         this.description=description;
         this.subject=subject;
         this.duration=duration;
         this.to=to;
+        this.peopleGoing=peopleGoing;
+        this.numPeopleGoing=numPeopleGoing;
     }
 
     public String getTitle() {
@@ -70,6 +74,22 @@ public class EventObject implements Serializable{
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public String getPeopleGoing() {
+        return peopleGoing;
+    }
+
+    public void setPeopleGoing(String peopleGoing) {
+        this.peopleGoing = peopleGoing;
+    }
+
+    public String getNumPeopleGoing() {
+        return numPeopleGoing;
+    }
+
+    public void setNumPeopleGoing(String numPeopleGoing) {
+        this.numPeopleGoing = numPeopleGoing;
     }
 
     public String getDurationString(){

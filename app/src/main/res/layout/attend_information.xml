@@ -67,11 +67,19 @@
         android:textSize="25sp"/>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="People Going:"
+        android:id="@+id/people_going"
+        android:layout_below="@id/subject"
+        android:textSize="25sp"/>
+
+    <TextView
         android:text="@string/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/description"
-        android:layout_below="@id/subject"
+        android:layout_below="@id/people_going"
         android:textSize="25sp"/>
 
     <TextView
@@ -108,6 +116,15 @@
         android:layout_alignBaseline="@id/description"
         android:layout_toEndOf="@id/description"
         android:layout_toRightOf="@id/description"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_people_going"
+        android:layout_alignBaseline="@id/people_going"
+        android:layout_toEndOf="@id/people_going"
+        android:layout_toRightOf="@id/people_going"
         android:textSize="15sp" />
 
     <TextView

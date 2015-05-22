@@ -97,7 +97,7 @@ public class ListActivityFragment extends Fragment implements SwipeRefreshLayout
 
                 EventObject clickedEvent = eventList.get(position);
 
-                String[] testInformation = {clickedEvent.getTo().toString(), clickedEvent.getLocation(), clickedEvent.getTitle(), clickedEvent.getDurationString(), clickedEvent.getDescription(), clickedEvent.getSubject()};
+                String[] testInformation = {clickedEvent.getTo().toString(), clickedEvent.getLocation(), clickedEvent.getTitle(), clickedEvent.getDurationString(), clickedEvent.getDescription(), clickedEvent.getSubject(), clickedEvent.getPeopleGoing(), clickedEvent.getNumPeopleGoing()};
                 in.putExtra(information, testInformation);
                 startActivity(in);
             }
@@ -175,7 +175,6 @@ public class ListActivityFragment extends Fragment implements SwipeRefreshLayout
     abstract class CreateNewProduct extends AsyncTask<String, String, String> implements Handler.Callback {
 
         ListActivityFragment caller;
-        View v;
         int position;
 
         public CreateNewProduct() {
@@ -209,7 +208,15 @@ public class ListActivityFragment extends Fragment implements SwipeRefreshLayout
                     if (!list.contains(object.getString("title"))) {
                         String[] time = object.getString("time").split(":");
                         time[1] = time[1].substring(0, 2);
-                        EventObject tempEven = new EventObject(object.getString("title"), object.getString("location"), object.getString("description"), object.getString("subject"), 0, new TimeObject(Integer.parseInt(time[0]), Integer.parseInt(time[1])));
+
+                        String longPeopleStr = object.getString("attend_ids");
+                        int length = 1;
+
+                        for (int i = 0; i < longPeopleStr.length(); i++){
+                            if(longPeopleStr.charAt(i) == ',')length++;
+                        }
+
+                        EventObject tempEven = new EventObject(object.getString("title"), object.getString("location"), object.getString("description"), object.getString("subject"), 0, new TimeObject(Integer.parseInt(time[0]), Integer.parseInt(time[1])), longPeopleStr, ""+length);
                         eventList.add(tempEven);
                         list.add(object.getString("title"));
                     }
