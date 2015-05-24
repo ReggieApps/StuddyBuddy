@@ -20,7 +20,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.adriangracia.studybuddy.activities.ListActivity;
 import com.example.adriangracia.studybuddy.R;
-import com.example.adriangracia.studybuddy.dialogs.ChooseDurationDialogFragment;
 import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
 import com.example.adriangracia.studybuddy.objects.TimeObject;
@@ -41,16 +40,16 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     private static final String TAG = "CreateEventFragment";
 
     public static final int TIME_REQUEST_CODE = 1;
-    public static final int DURATION_REQUEST_CODE = 2;
+    public static final int END_TIME_REQUEST_CODE = 2;
 
     private static final String EXTRA_TIME_OBJECT = "EXTRA_TIME_OBJ_";
-    private static final String EXTRA_DURATION = "_EXTRA_DUR_";
+    private static final String EXTRA_END_TIME = "_EXTRA_END_TIME_";
     private static final String EXTRA_DESCRIPTION = "_EXTRA_DESCRIP_";
     private static final String EXTRA_TITLE = "_EXTRA_TITLE_";
     private static final String EXTRA_PLACE = "_EXTRA_PLACE_";
 
     private Button pickTime;
-    private Button chooseDuration;
+    private Button endTime;
     private Button createEvent;
 
     private Spinner subjectSpinner;
@@ -59,9 +58,8 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     private EditText place;
     private EditText description;
 
-    private int duration = -1;
-
     private TimeObject to;
+    private TimeObject to2;
 
     private ProgressDialog pDialog;
 
@@ -83,15 +81,15 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                 picker.show(getActivity().getSupportFragmentManager(),TAG);
                 break;
             case R.id.button_create_pick_duration:
-                ChooseDurationDialogFragment dur = new ChooseDurationDialogFragment();
-                dur.setTargetFragment(CreateEventFragment.this,DURATION_REQUEST_CODE);
-                dur.show(getActivity().getSupportFragmentManager(),TAG);
+                TimePickerDialogFragment picker2 = new TimePickerDialogFragment();
+                picker2.setTargetFragment(CreateEventFragment.this,END_TIME_REQUEST_CODE);
+                picker2.show(getActivity().getSupportFragmentManager(), TAG);
                 break;
             case R.id.create_event_finalize:
                 if(eTitle.getText().length()==0) Toast.makeText(getActivity(),"Please enter a title.", Toast.LENGTH_LONG).show();
                 else if(place.getText().length()==0) Toast.makeText(getActivity(),"Please specify a location.", Toast.LENGTH_LONG).show();
                 else if(to==null) Toast.makeText(getActivity(),"Please specify a time.", Toast.LENGTH_LONG).show();
-                else if(duration==-1) Toast.makeText(getActivity(),"Please specify a duration.", Toast.LENGTH_LONG).show();
+                else if(to2==null) Toast.makeText(getActivity(),"Please specify an end time.", Toast.LENGTH_LONG).show();
                 else{
                     new CreateNewProduct().execute();
                 }
@@ -117,8 +115,8 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         pickTime = (Button)v.findViewById(R.id.button_create_pick_time);
         pickTime.setOnClickListener(this);
 
-        chooseDuration = (Button)v.findViewById(R.id.button_create_pick_duration);
-        chooseDuration.setOnClickListener(this);
+        endTime = (Button)v.findViewById(R.id.button_create_pick_duration);
+        endTime.setOnClickListener(this);
 
         createEvent = (Button) v.findViewById(R.id.create_event_finalize);
         createEvent.setOnClickListener(this);
@@ -142,11 +140,8 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
             if(pickTime!=null && to!=null)
                 pickTime.setText(to.toString());
 
-            duration = savedInstanceState.getInt(EXTRA_DURATION,-1);
-
-            if(duration!=-1 && chooseDuration!=null){
-                chooseDuration.setText(duration+" hours");
-            }
+            if(endTime!=null && to2!=null)
+                pickTime.setText(to2.toString());
 
             String descriptionString = savedInstanceState.getString(EXTRA_DESCRIPTION);
             if(descriptionString!=null && !descriptionString.isEmpty() && description!=null){
@@ -194,17 +189,21 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
                 break;
 
-            case DURATION_REQUEST_CODE:
+            case END_TIME_REQUEST_CODE:
 
-                if(!data.hasExtra(ChooseDurationDialogFragment.EXTRA_DURATION)){
-                    Toast.makeText(getActivity(),"Error, try again later",Toast.LENGTH_LONG).show();
+                TimeObject to2 = (TimeObject)data.getSerializableExtra(TimePickerDialogFragment.TIME_OBJ);
+                if(to2==null){
+                    Toast.makeText(getActivity(),"Error setting time. Please try later.",Toast.LENGTH_LONG).show();
+                    Log.e(TAG, "Null TO");
                     return;
                 }
 
-                duration = data.getIntExtra(ChooseDurationDialogFragment.EXTRA_DURATION,-1);
+                this.to2 = to2;
 
-                if(chooseDuration!=null){
-                    chooseDuration.setText(duration+" hours");
+                if(pickTime!=null){
+                    endTime.setText(to2.toString());
+                } else {
+                    Log.e(TAG, "Button Null");
                 }
 
                 break;
@@ -215,7 +214,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(EXTRA_TIME_OBJECT,to);
-        outState.putInt(EXTRA_DURATION,duration);
+        outState.putSerializable(EXTRA_END_TIME, to2);
 
         if(description!=null){
             outState.putString(EXTRA_DESCRIPTION,description.getText().toString());
@@ -257,6 +256,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
             String desc = description.getText().toString();
             String subj = subjectSpinner.getSelectedItem().toString();
             String time = to.toString();
+            String endTime = to2.toString();
 
 
             // Building Parameters
@@ -266,6 +266,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
             params.add(new BasicNameValuePair("description", desc));
             params.add(new BasicNameValuePair("subject", subj));
             params.add(new BasicNameValuePair("time", time));
+            params.add(new BasicNameValuePair("end_time", endTime));
             params.add(new BasicNameValuePair("attend_ids",Profile.getCurrentProfile().getId()));
 
 

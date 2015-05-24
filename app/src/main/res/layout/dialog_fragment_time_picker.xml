@@ -9,7 +9,8 @@
         android:id="@+id/time_picker"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></TimePicker>
+        android:layout_height="match_parent"
+        android:timePickerMode="spinner"></TimePicker>
 
 
 </FrameLayout>

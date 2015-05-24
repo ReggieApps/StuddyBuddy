@@ -1,30 +1,31 @@
 package com.example.adriangracia.studybuddy.objects;
 
 import java.io.Serializable;
+import java.sql.Time;
 
 /**
  * Created by idk on 4/22/2015.
  */
-public class EventObject implements Serializable{
+public class EventObject implements Serializable {
 
     String title;
     String location;
     String description;
     String subject;
-    int duration;
+    TimeObject endTime;
     TimeObject to;
     String peopleGoing;
     String numPeopleGoing;
 
-    public EventObject(String title, String location,String description, String subject, int duration, TimeObject to, String peopleGoing, String numPeopleGoing){
-        this.title=title;
-        this.location=location;
-        this.description=description;
-        this.subject=subject;
-        this.duration=duration;
-        this.to=to;
-        this.peopleGoing=peopleGoing;
-        this.numPeopleGoing=numPeopleGoing;
+    public EventObject(String title, String location, String description, String subject, TimeObject endTime, TimeObject to, String peopleGoing, String numPeopleGoing) {
+        this.title = title;
+        this.location = location;
+        this.description = description;
+        this.subject = subject;
+        this.endTime = endTime;
+        this.to = to;
+        this.peopleGoing = peopleGoing;
+        this.numPeopleGoing = numPeopleGoing;
     }
 
     public String getTitle() {
@@ -68,14 +69,6 @@ public class EventObject implements Serializable{
         this.subject = subject;
     }
 
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
     public String getPeopleGoing() {
         return peopleGoing;
     }
@@ -92,9 +85,11 @@ public class EventObject implements Serializable{
         this.numPeopleGoing = numPeopleGoing;
     }
 
-    public String getDurationString(){
-        String str ="";
-        str+=duration + " hours";
-        return str;
+    public TimeObject getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(TimeObject endTime) {
+        this.endTime = endTime;
     }
 }

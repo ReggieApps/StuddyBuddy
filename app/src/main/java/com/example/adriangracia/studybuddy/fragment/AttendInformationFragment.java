@@ -1,5 +1,6 @@
 package com.example.adriangracia.studybuddy.fragment;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,9 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.example.adriangracia.studybuddy.R;
+import com.example.adriangracia.studybuddy.activities.AttendInformation;
+import com.example.adriangracia.studybuddy.dialogs.PeopleGoingDialogFragment;
+import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
 
 /**
  * Created by rgpaul on 4/20/2015.
@@ -49,7 +53,7 @@ public class AttendInformationFragment extends Fragment {
             durationAppend.append("  " + value[3]);
             descriptionAppend.append("  " + value[4]);
             subjectAppend.append(" " + value[5]);
-            goingAppend.append(" " + value[7]);
+            goingAppend.append(value[7]);
 
 
         }
@@ -61,6 +65,19 @@ public class AttendInformationFragment extends Fragment {
                 toast.show();
             }
         });
+
+        TextView peopleGoingClick = (TextView) v.findViewById(R.id.edit_people_going);
+        peopleGoingClick.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                PeopleGoingDialogFragment going = new PeopleGoingDialogFragment();
+                going.setTargetFragment(AttendInformationFragment.this,0);
+                going.show(getActivity().getSupportFragmentManager(), "AttendInformationFragment");
+            }
+        });
+
+
+        peopleGoingClick.setPaintFlags(peopleGoingClick.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
 
         return v;
     }
