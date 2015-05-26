@@ -79,23 +79,13 @@ public class NavigationDrawerFragment extends Fragment{
 
         profName.append("Welcome " + Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName() + "!");
 
-//        logoutButton = (Button) v.findViewById(R.id.logout_button);
-//        logoutButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                LoginManager.getInstance().logOut();
-//                Toast.makeText(getActivity(), "Logged out ", Toast.LENGTH_SHORT).show();
-//                Intent i = new Intent(getActivity(), MainActivity.class);
-//                startActivity(i);
-//            }
-//        });
-
         return v;
     }
 
     public static List<Information> getData(){
         List<Information> data = new ArrayList<>();
-        int[] icons = {R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher};
-        String[] titles = {"Title 1", "Butt 2", "Hello 1", "Stuff 1", };
+        int[] icons = {android.R.drawable.ic_input_add, android.R.drawable.ic_input_add,android.R.drawable.ic_input_add, android.R.drawable.ic_delete};
+        String[] titles = {"Button 1", "Button 2", "Button 3", "Logout", };
 
         for(int i = 0; i<titles.length && i<icons.length; i++){
             Information tempInfo = new Information();

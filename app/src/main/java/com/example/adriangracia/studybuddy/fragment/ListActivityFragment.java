@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -28,6 +29,7 @@ import com.example.adriangracia.studybuddy.activities.CreateEvent;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
 import com.example.adriangracia.studybuddy.objects.EventObject;
 import com.example.adriangracia.studybuddy.objects.TimeObject;
+import com.software.shell.fab.ActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +45,7 @@ public class ListActivityFragment extends Fragment implements SwipeRefreshLayout
     final public String information = "information";
 
     public Spinner specifySubject;
+    public ActionButton createEventButton;
 
     private ArrayList<String> list = new ArrayList<>();
     private ArrayList<EventObject> eventList = new ArrayList<>();
@@ -103,7 +106,7 @@ public class ListActivityFragment extends Fragment implements SwipeRefreshLayout
             }
         });
 
-        Button createEventButton = (Button) v.findViewById(R.id.Button2);
+        createEventButton = (ActionButton) v.findViewById(R.id.Button2);
 
         createEventButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -112,6 +115,10 @@ public class ListActivityFragment extends Fragment implements SwipeRefreshLayout
                 startActivity(in);
             }
         });
+
+        createEventButton.setButtonColor(getActivity().getResources().getColor(R.color.accent_color));
+        createEventButton.setButtonColorPressed(getActivity().getResources().getColor(R.color.accent_color));
+        createEventButton.setRippleEffectEnabled(true);
 
         specifySubject = (Spinner) v.findViewById(R.id.spinner);
 

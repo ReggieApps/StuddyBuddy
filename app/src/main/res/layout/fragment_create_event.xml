@@ -90,9 +90,7 @@
                     android:id="@+id/button_create_pick_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/accent_color"
-                    android:text="Pick Time!"
-                    android:textColor="#FFFFFF" />
+                    android:text="Pick Time!" />
 
 
             </LinearLayout>
@@ -117,9 +115,7 @@
                     android:id="@+id/button_create_pick_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/accent_color"
-                    android:text="Pick end time!"
-                    android:textColor="#FFFFFF" />
+                    android:text="Pick end time!" />
             </LinearLayout>
 
             <TextView
@@ -174,9 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:background="@color/accent_color"
                 android:text="Create!"
-                android:textColor="#FFFFFF"
                 android:textSize="21sp" />
 
         </LinearLayout>
