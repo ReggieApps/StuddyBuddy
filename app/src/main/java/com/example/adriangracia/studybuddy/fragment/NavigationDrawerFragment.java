@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +22,14 @@ import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.activities.MainActivity;
+import com.example.adriangracia.studybuddy.adapters.DrawerListAdapter;
+import com.example.adriangracia.studybuddy.objects.Information;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Robby on 5/15/2015.
@@ -34,6 +41,8 @@ public class NavigationDrawerFragment extends Fragment{
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
+    private RecyclerView recylerView;
+    private DrawerListAdapter drawerListAdapter;
 
     private ImageView profPic;
     private TextView profName;
@@ -57,24 +66,45 @@ public class NavigationDrawerFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+
         profPic = (ImageView) v.findViewById(R.id.prof_pic);
         profName = (TextView) v.findViewById(R.id.facebook_name);
+        recylerView = (RecyclerView) v.findViewById(R.id.drawer_list);
+
+        drawerListAdapter = new DrawerListAdapter(getActivity(), getData());
+        recylerView.setAdapter(drawerListAdapter);
+        recylerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         Picasso.with(getActivity().getApplicationContext()).load("https://graph.facebook.com/" + Profile.getCurrentProfile().getId() + "/picture?type=large").into(profPic);
 
         profName.append("Welcome " + Profile.getCurrentProfile().getFirstName() + " " + Profile.getCurrentProfile().getLastName() + "!");
 
-        logoutButton = (Button) v.findViewById(R.id.logout_button);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                LoginManager.getInstance().logOut();
-                Toast.makeText(getActivity(), "Logged out ", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getActivity(), MainActivity.class);
-                startActivity(i);
-            }
-        });
+//        logoutButton = (Button) v.findViewById(R.id.logout_button);
+//        logoutButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                LoginManager.getInstance().logOut();
+//                Toast.makeText(getActivity(), "Logged out ", Toast.LENGTH_SHORT).show();
+//                Intent i = new Intent(getActivity(), MainActivity.class);
+//                startActivity(i);
+//            }
+//        });
 
         return v;
+    }
+
+    public static List<Information> getData(){
+        List<Information> data = new ArrayList<>();
+        int[] icons = {R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher};
+        String[] titles = {"Title 1", "Butt 2", "Hello 1", "Stuff 1", };
+
+        for(int i = 0; i<titles.length && i<icons.length; i++){
+            Information tempInfo = new Information();
+            tempInfo.title = titles[i];
+            tempInfo.iconId = icons[i];
+            data.add(tempInfo);
+        }
+
+        return data;
     }
 
     public void setUp(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
