@@ -2,14 +2,12 @@ package com.example.adriangracia.studybuddy.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.R;
@@ -73,7 +71,6 @@ public class DrawerListAdapter extends RecyclerView.Adapter<DrawerListAdapter.My
             super(itemView);
             butt = (Button) itemView.findViewById(R.id.list_button);
             icon = (ImageView) itemView.findViewById(R.id.list_icon);
-
         }
     }
 }

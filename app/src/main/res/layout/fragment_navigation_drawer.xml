@@ -12,7 +12,6 @@
         android:layout_width="280dp"
         android:layout_height="140dp"
         android:background="#B6B6B6"
-        android:layout_marginBottom="16dp"
         android:paddingTop="@dimen/margin_top">
 
         <ImageView
@@ -49,10 +48,9 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/drawer_list"
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/container_user_image">
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/container_user_image">
 
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

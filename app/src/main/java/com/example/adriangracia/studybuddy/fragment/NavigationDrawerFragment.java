@@ -2,7 +2,6 @@ package com.example.adriangracia.studybuddy.fragment;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,21 +10,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.R;
-import com.example.adriangracia.studybuddy.activities.MainActivity;
 import com.example.adriangracia.studybuddy.adapters.DrawerListAdapter;
 import com.example.adriangracia.studybuddy.objects.Information;
 import com.facebook.Profile;
-import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -41,12 +37,11 @@ public class NavigationDrawerFragment extends Fragment{
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private RecyclerView recylerView;
+    private RecyclerView recyclerView;
     private DrawerListAdapter drawerListAdapter;
 
     private ImageView profPic;
     private TextView profName;
-    private Button logoutButton;
 
     private View containerView;
 
@@ -69,11 +64,11 @@ public class NavigationDrawerFragment extends Fragment{
 
         profPic = (ImageView) v.findViewById(R.id.prof_pic);
         profName = (TextView) v.findViewById(R.id.facebook_name);
-        recylerView = (RecyclerView) v.findViewById(R.id.drawer_list);
+        recyclerView = (RecyclerView) v.findViewById(R.id.drawer_list);
 
         drawerListAdapter = new DrawerListAdapter(getActivity(), getData());
-        recylerView.setAdapter(drawerListAdapter);
-        recylerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(drawerListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         Picasso.with(getActivity().getApplicationContext()).load("https://graph.facebook.com/" + Profile.getCurrentProfile().getId() + "/picture?type=large").into(profPic);
 
