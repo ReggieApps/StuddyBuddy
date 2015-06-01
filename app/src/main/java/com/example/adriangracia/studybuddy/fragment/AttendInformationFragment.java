@@ -1,7 +1,9 @@
 package com.example.adriangracia.studybuddy.fragment;
 
+import android.app.Dialog;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -24,27 +26,28 @@ import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
 public class AttendInformationFragment extends Fragment {
 
     private Toolbar toolbar;
+    private String listOfPeople;
 
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.attend_information, container, false);
 
         toolbar = (Toolbar) v.findViewById(R.id.app_bar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getActivity().getIntent().getExtras();
         if (extras != null) {
             String[] value = extras.getStringArray("information");
 
 
-            TextView timeAppend = (TextView)v.findViewById(R.id.editTime);
-            TextView placeAppend = (TextView)v.findViewById(R.id.editPlace);
-            TextView titleAppend = (TextView)v.findViewById(R.id.title);
-            TextView durationAppend = (TextView)v.findViewById(R.id.editDuration);
-            TextView descriptionAppend = (TextView)v.findViewById(R.id.editDescription);
+            TextView timeAppend = (TextView) v.findViewById(R.id.editTime);
+            TextView placeAppend = (TextView) v.findViewById(R.id.editPlace);
+            TextView titleAppend = (TextView) v.findViewById(R.id.title);
+            TextView durationAppend = (TextView) v.findViewById(R.id.editDuration);
+            TextView descriptionAppend = (TextView) v.findViewById(R.id.editDescription);
             TextView subjectAppend = (TextView) v.findViewById(R.id.editSubject);
             TextView goingAppend = (TextView) v.findViewById(R.id.edit_people_going);
             timeAppend.append("  " + value[0]);
@@ -54,6 +57,8 @@ public class AttendInformationFragment extends Fragment {
             descriptionAppend.append("  " + value[4]);
             subjectAppend.append(" " + value[5]);
             goingAppend.append(value[7]);
+
+            listOfPeople = value[6];
 
 
         }
@@ -70,7 +75,11 @@ public class AttendInformationFragment extends Fragment {
         peopleGoingClick.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 PeopleGoingDialogFragment going = new PeopleGoingDialogFragment();
-                going.setTargetFragment(AttendInformationFragment.this,0);
+                going.setTargetFragment(AttendInformationFragment.this, 0);
+
+                Bundle bun = new Bundle();
+                bun.putString("peopleGoing", listOfPeople);
+                going.setArguments(bun);
                 going.show(getActivity().getSupportFragmentManager(), "AttendInformationFragment");
             }
         });
@@ -81,6 +90,5 @@ public class AttendInformationFragment extends Fragment {
 
         return v;
     }
-
 
 }

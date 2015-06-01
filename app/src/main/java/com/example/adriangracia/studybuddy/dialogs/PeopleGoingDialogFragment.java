@@ -9,6 +9,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.adapters.DrawerListAdapter;
@@ -24,6 +25,7 @@ public class PeopleGoingDialogFragment extends DialogFragment implements DialogI
 
     private DrawerListAdapter drawerListAdapter;
     private RecyclerView recyclerView;
+    private String listOfPeople;
 
     @NonNull
     @Override
@@ -32,10 +34,13 @@ public class PeopleGoingDialogFragment extends DialogFragment implements DialogI
 
         recyclerView = (RecyclerView) v.findViewById(R.id.people_going_list);
 
+        Bundle extras = getActivity().getIntent().getExtras();
+        listOfPeople = extras.getString("peopleGoing");
+        Toast.makeText(getActivity(), listOfPeople, Toast.LENGTH_SHORT).show();
+
         drawerListAdapter = new DrawerListAdapter(getActivity(), getData());
         recyclerView.setAdapter(drawerListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
@@ -45,10 +50,10 @@ public class PeopleGoingDialogFragment extends DialogFragment implements DialogI
                 .create();
     }
 
-    public static List<Information> getData(){
+    public List<Information> getData(){
         List<Information> data = new ArrayList<>();
-        int[] icons = {};
-        String[] titles = {};
+        int[] icons = {R.drawable.ic_launcher};
+        String[] titles = {listOfPeople};
 
         for(int i = 0; i<titles.length && i<icons.length; i++){
             Information tempInfo = new Information();

@@ -1,5 +1,6 @@
 package com.example.adriangracia.studybuddy.activities;
 
+import android.app.Dialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
@@ -14,7 +15,7 @@ public class AttendInformation extends SingleFragmentActivityDrawers {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch(id){
+        switch (id) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 break;
@@ -27,4 +28,5 @@ public class AttendInformation extends SingleFragmentActivityDrawers {
     public Fragment getFragment() {
         return new AttendInformationFragment();
     }
+
 }
