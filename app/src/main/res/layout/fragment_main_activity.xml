@@ -8,6 +8,13 @@
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skip"
+        android:id="@+id/skip_button"
+        android:layout_gravity="center_horizontal" />
+
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="match_parent"
